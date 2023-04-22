@@ -11,6 +11,6 @@ public class SampleJsonController {
     @GetMapping("/helloArr")
     public String[] helloArr(){
         log.info("helloarr");
-        return new String[]{"AAA","BBB","CCC"};
+        return new String[]{"AAA","BBB","CCC","DDD"};
     }
 }
