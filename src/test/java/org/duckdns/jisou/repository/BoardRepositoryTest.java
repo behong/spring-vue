@@ -5,7 +5,12 @@ import org.duckdns.jisou.domain.Board;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -48,5 +53,27 @@ public class BoardRepositoryTest {
         board.chage("수정된 타이틀 "+bno,"수정된 내용 .. "+bno);
 
         boardRepository.save(board);
+    }
+    @Test
+    public void testDelete(){
+        Long bno = 1L;
+
+        boardRepository.deleteById(bno);
+    }
+    @Test
+    public void testPaging(){
+        //1 page order by bno desc
+        Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
+
+        Page<Board> result = boardRepository.findAll(pageable);
+
+        log.info("total count : " + result.getTotalElements());
+        log.info("total page : " + result.getTotalPages());
+        log.info("total number : " + result.getNumber());
+        log.info("total size : " + result.getSize());
+
+        List<Board> list= result.getContent();
+        list.forEach( board ->  log.info(board));
+
     }
 }
