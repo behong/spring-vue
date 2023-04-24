@@ -26,4 +26,10 @@ public class Board extends BaseEntity {
     @Column(length = 50 , nullable = false)
     private String writer;
 
+    // 수정 메서드
+    public void chage(String title,String content){
+        this.title = title;
+        this.content = content;
+    }
+
 }

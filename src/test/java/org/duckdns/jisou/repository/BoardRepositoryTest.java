@@ -37,4 +37,16 @@ public class BoardRepositoryTest {
         Board board = boardList.orElseThrow();
         log.info(" 셀렉트한 보드 "+board);
     }
+
+    @Test
+    public void testUpdate(){
+        Long bno = 100L;
+        Optional<Board> boardList = boardRepository.findById(bno);
+
+        Board board = boardList.orElseThrow();
+
+        board.chage("수정된 타이틀 "+bno,"수정된 내용 .. "+bno);
+
+        boardRepository.save(board);
+    }
 }
